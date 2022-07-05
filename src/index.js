@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom/client";
 import { Stage, Layer } from "react-konva";
-import { ArrowDrawing, CircleDrawing, FreePathDrawing } from "./components/DrawingContent";
+import { ArrowDrawing, CircleDrawing, EllipseDrawing, FreePathDrawing } from "./components/DrawingContent";
 import "./styles.css";
 
 class DrawingScene extends Component {
@@ -10,7 +10,9 @@ class DrawingScene extends Component {
     this.state = {
       drawings: [],
       newDrawing: [],
-      newDrawingType: "FreePathDrawing"
+      newDrawingType: "FreePathDrawing",
+      fill: "#ff00ff44",
+      outline: "#ff00ffff"
     };
   }
 
@@ -18,9 +20,10 @@ class DrawingScene extends Component {
     const drawingClasses = {
       FreePathDrawing,
       ArrowDrawing,
-      CircleDrawing
+      CircleDrawing,
+      EllipseDrawing
     };
-    return new drawingClasses[type](x, y);
+    return new drawingClasses[type](x, y, this.state.fill, this.state.outline);
   };
 
   handleMouseDown = (e) => {
@@ -106,6 +109,14 @@ class DrawingScene extends Component {
         >
           <span className="material-icons">circle</span>
           <span className="button-text">Circle</span>
+        </button>
+        <button
+          onClick={(e) => {
+            this.setState({ newDrawingType: "EllipseDrawing" });
+          }}
+        >
+          <span className="material-icons">circle</span>
+          <span className="button-text">Ellipse</span>
         </button>
       </div>
     );
