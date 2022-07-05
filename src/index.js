@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom/client";
 import { Stage, Layer } from "react-konva";
 import { ArrowDrawing, CircleDrawing, EllipseDrawing, FreePathDrawing } from "./components/DrawingContent";
+import DrawingToolbar from "./components/DrawingToolbar";
 import "./styles.css";
 
 class DrawingScene extends Component {
@@ -67,6 +68,10 @@ class DrawingScene extends Component {
     }
   };
 
+  handleDrawingSelection = (drawingSelection) => {
+    this.setState({ newDrawingType: drawingSelection });
+  }
+
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
     return (
@@ -86,38 +91,7 @@ class DrawingScene extends Component {
             )}
           </Layer>
         </Stage>
-        <button
-          onClick={(e) => {
-            this.setState({ newDrawingType: "FreePathDrawing" });
-          }}
-        >
-          <span className="material-icons">edit</span>
-          <span className="button-text">Draw</span>
-        </button>
-        <button
-          onClick={(e) => {
-            this.setState({ newDrawingType: "ArrowDrawing" });
-          }}
-        >
-          <span className="material-icons">north_east</span>
-          <span className="button-text">Arrow</span>
-        </button>
-        <button
-          onClick={(e) => {
-            this.setState({ newDrawingType: "CircleDrawing" });
-          }}
-        >
-          <span className="material-icons">circle</span>
-          <span className="button-text">Circle</span>
-        </button>
-        <button
-          onClick={(e) => {
-            this.setState({ newDrawingType: "EllipseDrawing" });
-          }}
-        >
-          <span className="material-icons">circle</span>
-          <span className="button-text">Ellipse</span>
-        </button>
+        <DrawingToolbar handleDrawingSelection = {this.handleDrawingSelection} />
       </div>
     );
   }
