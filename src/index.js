@@ -1,59 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom/client";
-import { Stage, Layer, Arrow, Circle, Line } from "react-konva";
+import { Stage, Layer } from "react-konva";
+import { ArrowDrawing, CircleDrawing, FreePathDrawing } from "./components/DrawingContent";
 import "./styles.css";
-
-class DrawingContent {
-  constructor(startx, starty) {
-    this.startx = startx;
-    this.starty = starty;
-  }
-}
-
-class ArrowDrawing extends DrawingContent {
-  constructor(startx, starty) {
-    super(startx, starty);
-    this.x = startx;
-    this.y = starty;
-  }
-  registerMovement(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-  render() {
-    const points = [this.startx, this.starty, this.x, this.y];
-    return <Arrow points={points} fill="#0000ffaa" stroke="#00aaffff" />;
-  }
-}
-
-class CircleDrawing extends ArrowDrawing {
-  constructor(startx, starty) {
-    super(startx, starty);
-    this.x = startx;
-    this.y = starty;
-  }
-  render() {
-    const dx = this.startx - this.x;
-    const dy = this.starty - this.y;
-    const radius = Math.sqrt(dx * dx + dy * dy);
-    return (
-      <Circle radius={radius} x={this.startx} y={this.starty} fill="#ff00ff44" stroke="#ff00ffff" />
-    );
-  }
-}
-
-class FreePathDrawing extends DrawingContent {
-  constructor(startx, starty) {
-    super(startx, starty);
-    this.points = [startx, starty];
-  }
-  registerMovement(x, y) {
-    this.points = [...this.points, x, y];
-  }
-  render() {
-    return <Line points={this.points} fill="black" stroke="black" />;
-  }
-}
 
 class DrawingScene extends Component {
   constructor(props) {
@@ -139,21 +88,24 @@ class DrawingScene extends Component {
             this.setState({ newDrawingType: "FreePathDrawing" });
           }}
         >
-          Draw
+          <span className="material-icons">edit</span>
+          <span className="button-text">Draw</span>
         </button>
         <button
           onClick={(e) => {
             this.setState({ newDrawingType: "ArrowDrawing" });
           }}
         >
-          Arrow
+          <span className="material-icons">north_east</span>
+          <span className="button-text">Arrow</span>
         </button>
         <button
           onClick={(e) => {
             this.setState({ newDrawingType: "CircleDrawing" });
           }}
         >
-          Circle
+          <span className="material-icons">circle</span>
+          <span className="button-text">Circle</span>
         </button>
       </div>
     );
