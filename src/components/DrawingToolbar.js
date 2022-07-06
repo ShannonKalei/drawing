@@ -1,6 +1,10 @@
 import React from "react";
 
 export default function DrawingToolbar(props) {
+  const toolbarSelection = (toolSelection) => {
+    props.handleToolbarSelection(toolSelection);
+  }
+  
   const drawingType = (drawingSelection) => {
     props.handleDrawingSelection(drawingSelection);
   }
@@ -38,6 +42,14 @@ export default function DrawingToolbar(props) {
         >
           <span className="material-icons">circle</span>
           <span className="button-text">Ellipse</span>
+        </button>
+        <button
+          onClick={() => {
+            toolbarSelection("move");
+          }}
+        >
+          <span className="material-icons">pan_tool</span>
+          <span className="button-text">Move</span>
         </button>
     </React.Fragment>
   )

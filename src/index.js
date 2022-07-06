@@ -13,7 +13,8 @@ class DrawingScene extends Component {
       newDrawing: [],
       newDrawingType: "FreePathDrawing",
       fill: "#ff00ff44",
-      outline: "#ff00ffff"
+      outline: "#ff00ffff",
+      selectedTool: "drawing"
     };
   }
 
@@ -28,47 +29,68 @@ class DrawingScene extends Component {
   };
 
   handleMouseDown = (e) => {
-    const { newDrawing } = this.state;
-    if (newDrawing.length === 0) {
-      const { x, y } = e.target.getStage().getPointerPosition();
-      const newDrawing = this.getNewDrawingBasedOnType(
-        x,
-        y,
-        this.state.newDrawingType
-      );
-      this.setState({
-        newDrawing: [newDrawing]
-      });
+    if (this.state.selectedTool === "drawing") {
+      this.setState({selectedTool: "drawing"});
+      e.target.attrs.draggable = false;
+      //console.log("drawings: ", this.state.drawings);
+      const { newDrawing } = this.state;
+      if (newDrawing.length === 0) {
+        const { x, y } = e.target.getStage().getPointerPosition();
+        const newDrawing = this.getNewDrawingBasedOnType(
+          x,
+          y,
+          this.state.newDrawingType
+        );
+        this.setState({
+          newDrawing: [newDrawing]
+        });
+      }
+    } else if (this.state.selectedTool === "move") {
+      e.target.attrs.draggable = true;
+      //console.log("mouse down: ", e.target);
     }
   };
 
   handleMouseUp = (e) => {
-    const { newDrawing, drawings } = this.state;
-    if (newDrawing.length === 1) {
-      const { x, y } = e.target.getStage().getPointerPosition();
-      const drawingToAdd = newDrawing[0];
-      drawingToAdd.registerMovement(x, y);
-      drawings.push(drawingToAdd);
-      this.setState({
-        newDrawing: [],
-        drawings
-      });
+    if (this.state.selectedTool === "drawing") {
+      const { newDrawing, drawings } = this.state;
+      if (newDrawing.length === 1) {
+        const { x, y } = e.target.getStage().getPointerPosition();
+        const drawingToAdd = newDrawing[0];
+        drawingToAdd.registerMovement(x, y);
+        drawings.push(drawingToAdd);
+        this.setState({
+          newDrawing: [],
+          drawings
+        });
+      } else if (this.state.selectedTool === "move") {
+        // e.target.attrs.draggable = false;
+        //console.log("mouse up: ", e.target);
+      }
     }
+    // console.log("drawings: ", this.state.drawings);
   };
 
   handleMouseMove = (e) => {
-    const { newDrawing } = this.state;
-    if (newDrawing.length === 1) {
-      const { x, y } = e.target.getStage().getPointerPosition();
-      const updatedNewDrawing = newDrawing[0];
-      updatedNewDrawing.registerMovement(x, y);
-      this.setState({
-        newDrawing: [updatedNewDrawing]
-      });
+    if (this.state.selectedTool === "drawing") {
+      const { newDrawing } = this.state;
+      if (newDrawing.length === 1) {
+        const { x, y } = e.target.getStage().getPointerPosition();
+        const updatedNewDrawing = newDrawing[0];
+        updatedNewDrawing.registerMovement(x, y);
+        this.setState({
+          newDrawing: [updatedNewDrawing]
+        });
+      }
     }
   };
 
+  handleToolbarSelection = (toolSelection) => {
+    this.setState({ selectedTool: toolSelection });
+  }
+
   handleDrawingSelection = (drawingSelection) => {
+    this.setState({ selectedTool: "drawing" });
     this.setState({ newDrawingType: drawingSelection });
   }
 
@@ -82,8 +104,9 @@ class DrawingScene extends Component {
           onMouseMove={this.handleMouseMove}
           width={900}
           height={600}
+          draggable={false}
         >
-          <Layer>
+          <Layer draggable={false}>
             {React.Children.toArray(
               drawings.map((value) => {
                 return value.render();
@@ -91,7 +114,7 @@ class DrawingScene extends Component {
             )}
           </Layer>
         </Stage>
-        <DrawingToolbar handleDrawingSelection = {this.handleDrawingSelection} />
+        <DrawingToolbar handleDrawingSelection = {this.handleDrawingSelection} handleToolbarSelection = {this.handleToolbarSelection} />
       </div>
     );
   }

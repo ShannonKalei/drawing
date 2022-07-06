@@ -22,9 +22,17 @@ class ArrowDrawing extends DrawingContent {
     this.x = x;
     this.y = y;
   }
+  handleDragStart = e => {
+    // e.evt.preventDefault();
+    // console.log(e);
+  };
+  handleDragEnd = e => {
+    // this.x = e.target.x();
+    // this.y = e.target.y();
+  };
   render() {
     const points = [this.startx, this.starty, this.x, this.y];
-    return <Arrow points={points} fill={this.fill} stroke={this.outline} />;
+    return <Arrow draggable onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} points={points} fill={this.fill} stroke={this.outline} />;
   }
 }
 
@@ -41,7 +49,7 @@ class CircleDrawing extends ArrowDrawing {
     const dy = this.starty - this.y;
     const radius = Math.sqrt(dx * dx + dy * dy);
     return (
-      <Circle radius={radius} x={this.startx} y={this.starty} fill={this.fill} stroke={this.outline} />
+      <Circle draggable onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} radius={radius} x={this.startx} y={this.starty} fill={this.fill} stroke={this.outline} />
     );
   }
 }
@@ -59,7 +67,7 @@ class EllipseDrawing extends ArrowDrawing {
     const dy = this.starty - this.y;
     const radius = {x: Math.abs(dx), y: Math.abs(dy)};
     return (
-      <Ellipse radius={radius} x={this.startx} y={this.starty} fill={this.fill} stroke={this.outline} />
+      <Ellipse draggable onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} radius={radius} x={this.startx} y={this.starty} fill={this.fill} stroke={this.outline} />
     );
   }
 }
@@ -74,8 +82,12 @@ class FreePathDrawing extends DrawingContent {
   registerMovement(x, y) {
     this.points = [...this.points, x, y];
   }
+  handleDragEnd = e => {
+    this.x = e.target.x();
+    this.y = e.target.y();
+  };
   render() {
-    return <Line points={this.points} fill={this.fill} stroke={this.outline} />;
+    return <Line draggable points={this.points} fill={this.fill} stroke={this.outline} />;
   }
 }
 
