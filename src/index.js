@@ -20,6 +20,7 @@ class DrawingScene extends Component {
       fill: "#ff00ff44",
       outline: "#ff00ffff",
       selectedTool: "drawing",
+      isDraggable: false,
     };
   }
 
@@ -30,14 +31,12 @@ class DrawingScene extends Component {
       CircleDrawing,
       EllipseDrawing,
     };
-    return new drawingClasses[type](x, y, this.state.fill, this.state.outline);
+    return new drawingClasses[type](x, y, this.state.fill, this.state.outline, this.state.isDraggable);
   };
 
   handleMouseDown = (e) => {
     if (this.state.selectedTool === "drawing") {
       this.setState({ selectedTool: "drawing" });
-      e.target.attrs.draggable = false;
-      //console.log("drawings: ", this.state.drawings);
       const { newDrawing } = this.state;
       if (newDrawing.length === 0) {
         const { x, y } = e.target.getStage().getPointerPosition();
@@ -50,9 +49,6 @@ class DrawingScene extends Component {
           newDrawing: [newDrawing],
         });
       }
-    } else if (this.state.selectedTool === "move") {
-      e.target.attrs.draggable = true;
-      //console.log("mouse down: ", e.target);
     }
   };
 
@@ -68,12 +64,8 @@ class DrawingScene extends Component {
           newDrawing: [],
           drawings,
         });
-      } else if (this.state.selectedTool === "move") {
-        // e.target.attrs.draggable = false;
-        //console.log("mouse up: ", e.target);
       }
     }
-    // console.log("drawings: ", this.state.drawings);
   };
 
   handleMouseMove = (e) => {
@@ -92,10 +84,13 @@ class DrawingScene extends Component {
 
   handleToolbarSelection = (toolSelection) => {
     this.setState({ selectedTool: toolSelection });
+    if (toolSelection === "move") {
+      this.setState({ isDraggable: true });
+    }
   };
 
   handleDrawingSelection = (drawingSelection) => {
-    this.setState({ selectedTool: "drawing" });
+    this.setState({ selectedTool: "drawing", isDraggable: false });
     this.setState({ newDrawingType: drawingSelection });
   };
 
@@ -109,11 +104,11 @@ class DrawingScene extends Component {
           onMouseMove={this.handleMouseMove}
           width={900}
           height={600}
-          draggable={false}
         >
-          <Layer draggable={false}>
+          <Layer>
             {React.Children.toArray(
               drawings.map((value) => {
+                value.isDraggable = this.state.isDraggable;
                 return value.render();
               })
             )}
