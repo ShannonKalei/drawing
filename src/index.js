@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom/client";
 import { Stage, Layer } from "react-konva";
-import { ArrowDrawing, CircleDrawing, EllipseDrawing, FreePathDrawing } from "./components/DrawingContent";
+import {
+  ArrowDrawing,
+  CircleDrawing,
+  EllipseDrawing,
+  FreePathDrawing,
+} from "./components/DrawingContent";
 import DrawingToolbar from "./components/DrawingToolbar";
 import "./styles.css";
 
@@ -14,7 +19,7 @@ class DrawingScene extends Component {
       newDrawingType: "FreePathDrawing",
       fill: "#ff00ff44",
       outline: "#ff00ffff",
-      selectedTool: "drawing"
+      selectedTool: "drawing",
     };
   }
 
@@ -23,14 +28,14 @@ class DrawingScene extends Component {
       FreePathDrawing,
       ArrowDrawing,
       CircleDrawing,
-      EllipseDrawing
+      EllipseDrawing,
     };
     return new drawingClasses[type](x, y, this.state.fill, this.state.outline);
   };
 
   handleMouseDown = (e) => {
     if (this.state.selectedTool === "drawing") {
-      this.setState({selectedTool: "drawing"});
+      this.setState({ selectedTool: "drawing" });
       e.target.attrs.draggable = false;
       //console.log("drawings: ", this.state.drawings);
       const { newDrawing } = this.state;
@@ -42,7 +47,7 @@ class DrawingScene extends Component {
           this.state.newDrawingType
         );
         this.setState({
-          newDrawing: [newDrawing]
+          newDrawing: [newDrawing],
         });
       }
     } else if (this.state.selectedTool === "move") {
@@ -61,7 +66,7 @@ class DrawingScene extends Component {
         drawings.push(drawingToAdd);
         this.setState({
           newDrawing: [],
-          drawings
+          drawings,
         });
       } else if (this.state.selectedTool === "move") {
         // e.target.attrs.draggable = false;
@@ -79,7 +84,7 @@ class DrawingScene extends Component {
         const updatedNewDrawing = newDrawing[0];
         updatedNewDrawing.registerMovement(x, y);
         this.setState({
-          newDrawing: [updatedNewDrawing]
+          newDrawing: [updatedNewDrawing],
         });
       }
     }
@@ -87,12 +92,12 @@ class DrawingScene extends Component {
 
   handleToolbarSelection = (toolSelection) => {
     this.setState({ selectedTool: toolSelection });
-  }
+  };
 
   handleDrawingSelection = (drawingSelection) => {
     this.setState({ selectedTool: "drawing" });
     this.setState({ newDrawingType: drawingSelection });
-  }
+  };
 
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
@@ -114,7 +119,10 @@ class DrawingScene extends Component {
             )}
           </Layer>
         </Stage>
-        <DrawingToolbar handleDrawingSelection = {this.handleDrawingSelection} handleToolbarSelection = {this.handleToolbarSelection} />
+        <DrawingToolbar
+          handleDrawingSelection={this.handleDrawingSelection}
+          handleToolbarSelection={this.handleToolbarSelection}
+        />
       </div>
     );
   }
