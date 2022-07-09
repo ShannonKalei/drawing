@@ -8,6 +8,7 @@ import {
   FreePathDrawing,
 } from "./components/DrawingContent";
 import DrawingToolbar from "./components/DrawingToolbar";
+import ColorPicker from "./components/ColorPicker";
 import "./styles.css";
 
 class DrawingScene extends Component {
@@ -17,8 +18,8 @@ class DrawingScene extends Component {
       drawings: [],
       newDrawing: [],
       newDrawingType: "FreePathDrawing",
-      fill: "#ff00ff44",
-      outline: "#ff00ffff",
+      fill: "#aaccee44",
+      stroke: "#aacceeff",
       selectedTool: "drawing",
       isDraggable: false,
     };
@@ -31,7 +32,7 @@ class DrawingScene extends Component {
       CircleDrawing,
       EllipseDrawing,
     };
-    return new drawingClasses[type](x, y, this.state.fill, this.state.outline, this.state.isDraggable);
+    return new drawingClasses[type](x, y, this.state.fill, this.state.stroke, this.state.isDraggable);
   };
 
   handleMouseDown = (e) => {
@@ -94,6 +95,12 @@ class DrawingScene extends Component {
     this.setState({ newDrawingType: drawingSelection });
   };
 
+  updateColorSelection = (colorSelection, colorTarget) => {
+    console.log(colorTarget);
+    if (colorTarget === "stroke") this.setState({ stroke: colorSelection });
+    if (colorTarget === "fill") this.setState({ fill: colorSelection });
+  }
+
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
     return (
@@ -118,6 +125,12 @@ class DrawingScene extends Component {
           handleDrawingSelection={this.handleDrawingSelection}
           handleToolbarSelection={this.handleToolbarSelection}
         />
+        <div className="flex-container">
+          <h1>Stroke</h1>
+          <ColorPicker colorTarget={"stroke"} updateColorSelection={this.updateColorSelection}/>
+          <h1>Fill</h1>
+          <ColorPicker colorTarget={"fill"} updateColorSelection={this.updateColorSelection}/>
+        </div>
       </div>
     );
   }

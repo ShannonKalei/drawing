@@ -2,22 +2,22 @@ import React from "react";
 import { Arrow, Circle, Ellipse, Line } from "react-konva";
 
 class DrawingContent {
-  constructor(startx, starty, fill, outline, isDraggable) {
+  constructor(startx, starty, fill, stroke, isDraggable) {
     this.startx = startx;
     this.starty = starty;
     this.fill = fill;
-    this.outline = outline;
+    this.stroke = stroke;
     this.isDraggable = isDraggable;
   }
 }
 
 class ArrowDrawing extends DrawingContent {
-  constructor(startx, starty, fill, outline, isDraggable) {
-    super(startx, starty, fill, outline, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable) {
+    super(startx, starty, fill, stroke, isDraggable);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
-    this.outline = outline;
+    this.stroke = stroke;
     this.isDraggable = isDraggable;
   }
   registerMovement(x, y) {
@@ -35,19 +35,19 @@ class ArrowDrawing extends DrawingContent {
         onDragEnd={(e) => e.evt.preventDefault()}
         points={points}
         fill={this.fill}
-        stroke={this.outline}
+        stroke={this.stroke}
       />
     );
   }
 }
 
 class CircleDrawing extends ArrowDrawing {
-  constructor(startx, starty, fill, outline, isDraggable) {
-    super(startx, starty, fill, outline, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable) {
+    super(startx, starty, fill, stroke, isDraggable);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
-    this.outline = outline;
+    this.stroke = stroke;
     this.isDraggable = isDraggable;
   }
   render() {
@@ -64,19 +64,19 @@ class CircleDrawing extends ArrowDrawing {
         x={this.startx}
         y={this.starty}
         fill={this.fill}
-        stroke={this.outline}
+        stroke={this.stroke}
       />
     );
   }
 }
 
 class EllipseDrawing extends ArrowDrawing {
-  constructor(startx, starty, fill, outline, isDraggable) {
-    super(startx, starty, fill, outline, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable) {
+    super(startx, starty, fill, stroke, isDraggable);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
-    this.outline = outline;
+    this.stroke = stroke;
     this.isDraggable = isDraggable;
   }
   render() {
@@ -93,18 +93,18 @@ class EllipseDrawing extends ArrowDrawing {
         x={this.startx}
         y={this.starty}
         fill={this.fill}
-        stroke={this.outline}
+        stroke={this.stroke}
       />
     );
   }
 }
 
 class FreePathDrawing extends DrawingContent {
-  constructor(startx, starty, fill, outline, isDraggable) {
-    super(startx, starty, fill, outline,isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable) {
+    super(startx, starty, fill, stroke,isDraggable);
     this.points = [startx, starty];
     this.fill = fill;
-    this.outline = outline;
+    this.stroke = stroke;
     this.isDraggable = isDraggable;
   }
   registerMovement(x, y) {
@@ -117,7 +117,7 @@ class FreePathDrawing extends DrawingContent {
         draggable={this.isDraggable}
         points={this.points}
         fill={this.fill}
-        stroke={this.outline}
+        stroke={this.stroke}
       />
     );
   }

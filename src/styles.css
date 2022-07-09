@@ -2,3 +2,24 @@ button {
   background-color: lightblue;
   margin: 2px;
 }
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 90px;
+  margin: 10px 55px 0;
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #eee;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.color-picker {
+  margin: 12px;
+}
+
+.flex-container {
+  display: flex;
+}
