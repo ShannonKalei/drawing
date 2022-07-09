@@ -96,7 +96,6 @@ class DrawingScene extends Component {
   };
 
   updateColorSelection = (colorSelection, colorTarget) => {
-    console.log(colorTarget);
     if (colorTarget === "stroke") this.setState({ stroke: colorSelection });
     if (colorTarget === "fill") this.setState({ fill: colorSelection });
   }
