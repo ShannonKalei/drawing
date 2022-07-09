@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
+import hexToRGBA from "../utils/hexToRGBA";
+import checkerboard from "../assets/checkerboard.png";
 
 export default function ColorPicker(props) {
   const [color, setColor] = useState("#aaccee");
   const [alpha, setAlpha] = useState(100);
+  const [rgbaColor, setRgbaColor] = useState(hexToRGBA(color));
 
   const colorSelection = (selectedColor) => {
+    setRgbaColor(hexToRGBA(selectedColor));
     setColor(selectedColor);
     props.updateColorSelection(selectedColor, props.colorTarget);
   }
@@ -23,13 +27,11 @@ export default function ColorPicker(props) {
       case 5:
         hexAlpha = selectedColor.slice(-1, selectedColor.length);
         workingAlpha = parseInt(hexAlpha, 16);
-        console.log(workingAlpha);
         setAlpha(workingAlpha);
         break;
       case 9:
         hexAlpha = selectedColor.slice(-2, selectedColor.length);
         workingAlpha = parseInt(hexAlpha, 16);
-        console.log(workingAlpha);
         setAlpha(workingAlpha);
         break;
       default:
@@ -77,24 +79,25 @@ export default function ColorPicker(props) {
 
   return (
     <div className="color-picker">
-      <div className="flex-container">
-        <HexColorPicker
-          color={color}
-          onChange={(value) => {
-            handleAlphaSelection(alpha, value);
-          }}
-        />
-        <input 
-          id="alpha-slider"
-          type="range"
-          min="0"
-          max="100"
-          step="1"
-          value={alpha}
-          orient="vertical"
-          onChange={e => handleAlphaSelection(e.target.value)}
-        />
-      </div>
+      <HexColorPicker
+        color={color}
+        onChange={(value) => {
+          handleAlphaSelection(alpha, value);
+        }}
+      />
+      <input 
+        id="alpha-slider"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        value={alpha}
+        orient="vertical"
+        onChange={e => handleAlphaSelection(e.target.value)}
+        style={{ 
+          background: `linear-gradient(to right, rgba(${rgbaColor.r}, ${rgbaColor.g}, ${rgbaColor.b}, 0), rgba(${rgbaColor.r}, ${rgbaColor.g}, ${rgbaColor.b}, 1)), url(${checkerboard})` 
+        }}
+      />
       <HexColorInput 
         className="color-picker-input"
         color={color}
