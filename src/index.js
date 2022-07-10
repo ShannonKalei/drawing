@@ -6,6 +6,8 @@ import {
   CircleDrawing,
   EllipseDrawing,
   FreePathDrawing,
+  SquareDrawing,
+  PolygonDrawing
 } from "./components/DrawingContent";
 import DrawingToolbar from "./components/DrawingToolbar";
 import ColorPicker from "./components/ColorPicker";
@@ -22,6 +24,7 @@ class DrawingScene extends Component {
       stroke: "#aacceeff",
       selectedTool: "drawing",
       isDraggable: false,
+      polygonSides: 5
     };
   }
 
@@ -31,8 +34,17 @@ class DrawingScene extends Component {
       ArrowDrawing,
       CircleDrawing,
       EllipseDrawing,
+      SquareDrawing,
+      PolygonDrawing
     };
-    return new drawingClasses[type](x, y, this.state.fill, this.state.stroke, this.state.isDraggable);
+    return new drawingClasses[type](
+      x,
+      y,
+      this.state.fill,
+      this.state.stroke,
+      this.state.isDraggable,
+      this.state.polygonSides
+    );
   };
 
   handleMouseDown = (e) => {
@@ -100,6 +112,10 @@ class DrawingScene extends Component {
     if (colorTarget === "fill") this.setState({ fill: colorSelection });
   }
 
+  handlePolygonSides = (sides) => {
+    this.setState({ polygonSides: sides });
+  }
+
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
     return (
@@ -123,6 +139,9 @@ class DrawingScene extends Component {
         <DrawingToolbar
           handleDrawingSelection={this.handleDrawingSelection}
           handleToolbarSelection={this.handleToolbarSelection}
+          handlePolygonSides={this.handlePolygonSides}
+          polygonSides={this.state.polygonSides}
+          activeTool={this.state.selectedTool}
         />
         <div className="flex-container">
           <h1>Stroke</h1>
@@ -135,13 +154,9 @@ class DrawingScene extends Component {
   }
 }
 
-function App() {
-  return <DrawingScene />;
-}
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <DrawingScene />
   </React.StrictMode>
 );

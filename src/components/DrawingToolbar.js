@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState }  from "react";
 
 export default function DrawingToolbar(props) {
+  const [currentTool, setCurrentTool] = useState(props.activeTool);
+  const [polygonSides, setPolygonSides] = useState(props.polygonSides);
+
   const toolbarSelection = (toolSelection) => {
     props.handleToolbarSelection(toolSelection);
   };
@@ -8,6 +11,11 @@ export default function DrawingToolbar(props) {
   const drawingType = (drawingSelection) => {
     props.handleDrawingSelection(drawingSelection);
   };
+
+  const handleNumberOfPolygonSides = (sides) => {
+    setPolygonSides(sides);
+    props.handlePolygonSides(sides);
+  }
 
   return (
     <React.Fragment>
@@ -43,6 +51,33 @@ export default function DrawingToolbar(props) {
         <span className="material-icons">circle</span>
         <span className="button-text">Ellipse</span>
       </button>
+      <button
+        onClick={() => {
+          drawingType("SquareDrawing");
+        }}
+      >
+        <span className="material-icons">square</span>
+        <span className="button-text">Square</span>
+      </button>
+      <button
+        onClick={() => {
+          drawingType("PolygonDrawing");
+        }}
+      >
+        <span className="material-icons">hexagon</span>
+        <span className="button-text">Polygon</span>
+      </button>
+      <input 
+        id="number-of-sides"
+        type="number"
+        inputMode="numeric"
+        min={3}
+        max={20}
+        value={polygonSides}
+        onChange={(e) => {
+          handleNumberOfPolygonSides(e.target.value);
+        }}
+      />
       <button
         onClick={() => {
           toolbarSelection("move");
