@@ -118,13 +118,15 @@ class DrawingScene extends Component {
 
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
+    const canvasWidth = document.body.clientWidth;
     return (
       <div>
         <Stage
+          className="drawing-canvas"
           onMouseDown={this.handleMouseDown}
           onMouseUp={this.handleMouseUp}
           onMouseMove={this.handleMouseMove}
-          width={900}
+          width={canvasWidth}
           height={600}
         >
           <Layer>
@@ -141,7 +143,8 @@ class DrawingScene extends Component {
           handleToolbarSelection={this.handleToolbarSelection}
           handlePolygonSides={this.handlePolygonSides}
           polygonSides={this.state.polygonSides}
-          activeTool={this.state.selectedTool}
+          drawingType={this.state.newDrawingType}
+          currentTool={this.state.selectedTool}
         />
         <div className="flex-container">
           <h1>Stroke</h1>

@@ -1,6 +1,19 @@
+.root {
+  overflow: hidden;
+}
+
 button {
   background-color: lightblue;
+  border-radius: 10px;
   margin: 2px;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+}
+
+button:focus-visible {
+  border: 2px solid;
+  box-shadow: 0 2px 4px 3px #00000088;
 }
 
 .color-picker-input {
@@ -14,6 +27,21 @@ button {
   background: #eee;
   text-align: center;
   letter-spacing: 1px;
+}
+
+.drawing-canvas {
+  display:flex;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 2px #00000088;
+  margin: 10px 0;
+  overflow: hidden;
+  width: 95vw;
+}
+
+.material-icons {
+  font-size: inherit;
+  margin-right: 2px;
 }
 
 .color-picker {
