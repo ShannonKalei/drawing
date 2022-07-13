@@ -51,6 +51,7 @@ button {
   font-size: 18px;
   display: inline-flex;
   align-items: center;
+  padding-bottom: 4px;
 }
 
 button:focus-visible {
@@ -76,9 +77,9 @@ button:focus-visible {
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 2px 4px 2px #00000088;
-  margin: 10px 0;
+  margin-bottom: 10px;
   overflow: hidden;
-  width: 95vw;
+  width: 100%;
 }
 
 .material-icons {
@@ -99,9 +100,27 @@ button:focus-visible {
   box-shadow: 0 2px 4px 2px #00000088 !important;
 }
 
+h1 {
+  font-family: 'OpenDyslexic3Regular', 'Architects Daughter', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+}
+
+span {
+  font-family: 'OpenDyslexic3Regular', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+}
+
+.page-container {
+  margin: 0 20px;
+}
 
 .flex-container {
   display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+  align-items: center;
 }
 
 input[type=range]
