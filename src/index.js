@@ -13,5 +13,6 @@ root.render(
         <DrawingScene />
       </div>
     </div>
+    <div id="gradient-background" className="gradient-background"></div>
   </React.StrictMode>
 );

@@ -3,40 +3,88 @@
 }
 
 body {
-  --color-background: #ffffff;
-  --color-foreground: #000000;
-  transition: color 2s ease-out, background-color 2s ease-out;
+  --color-background: #fff;
+  --color-gradient: #000;
+  --color-foreground: #000;
+  --color-button: #aaa;
+  --color-button-active: #ddd;
+  --color-button-border: #000
 }
 
 .sunrise {
-  --color-background: #ffdddd;
-  --color-foreground: #494138;
+  --color-background: #ffcece;
+  --color-gradient: #ffdbb1;
+  --color-foreground: #403931;
+  --color-button: #ffcece;
+  --color-button-active: #fff;
+  --color-button-border: #000
   
 }
 
 .light {
   --color-background: #ffffff;
+  --color-gradient: transparent;
   --color-foreground: #000000;
+  --color-button: #ddd;
+  --color-button-active: #bbb;
+  --color-button-border: #000
 }
 
 .sunset {
-  --color-background: #7f4d89;
-  --color-foreground: #ffb996;
+  --color-background: #351931;
+  --color-gradient: #3c0000;
+  --color-foreground: #ffcece;
+  --color-button: #351931;
+  --color-button-active: #462742;
+  --color-button-border: #fff;
 }
 
 .night {
-  --color-background: #202630;
+  --color-background: #202230;
+  --color-gradient: #1d1335;
   --color-foreground: #b0b0b0;
+  --color-button: #202230;
+  --color-button-active: #313341;
+  --color-button-border: #000
 }
 
 .dark {
-  --color-background: #101010;
-  --color-foreground: #555555;
+  --color-background: #1a1a1a;
+  --color-gradient: transparent;
+  --color-foreground: #a5a5a5;
+  --color-button: #2a2a2a;
+  --color-button-active: #ddd;
+  --color-button-border: #000
 }
 
 body {
   color: var(--color-foreground);
   background-color: var(--color-background);
+  transition: color 2s ease-out, background-color 2s ease-out;
+}
+
+.gradient-background {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 2s ease-out;
+}
+
+.gradient-background-on {
+  background: linear-gradient(transparent 0%, var(--color-gradient) 75%, transparent 100%);
+  opacity: 1;
+  transition: opacity 2s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 2s ease-out;
 }
 
 img,
@@ -45,18 +93,20 @@ video {
 }
 
 button {
-  background-color: lightblue;
+  background-color: var(--color-button);
+  border-color: var(--color-button-border);
+  color: var(--color-foreground);
   border-radius: 10px;
   margin: 2px;
   font-size: 18px;
-  display: inline-flex;
   align-items: center;
   padding-bottom: 4px;
+  transition: background-color 2s ease-out, border-color  2s;
 }
 
 button:focus-visible {
   border: 2px solid;
-  box-shadow: 0 2px 4px 3px #00000088;
+  box-shadow: 0 2px 4px 4px #00000088;
 }
 
 .color-picker-input {
@@ -74,12 +124,13 @@ button:focus-visible {
 
 .drawing-canvas {
   display:flex;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-foreground);
   border-radius: 10px;
   box-shadow: 0 2px 4px 2px #00000088;
   margin-bottom: 10px;
   overflow: hidden;
   width: 100%;
+  transition: border-color  2s  ease-out;
 }
 
 .material-icons {
@@ -90,6 +141,7 @@ button:focus-visible {
 .color-picker {
   margin: 12px;
 }
+
  /* react-colorful overrides */
 .react-colorful__last-control {
   border-radius: 0 !important;
@@ -157,6 +209,13 @@ input[type=range]::-webkit-slider-thumb {
   width: 35vw;
 }
 
+/* rc-slider overrides */
+.rc-slider-dot {
+  bottom: -5px;
+  width: 12px;
+  height: 12px;
+}
+
 .rc-slider-mark-text {
   color: var(--color-foreground);
   font-size: 16px;
@@ -166,7 +225,17 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .rc-slider-mark {
-  top: 10px;
+  top: 12px;
+}
+
+.rc-slider-handle {
+  height: 20px;
+  width: 20px;
+  margin-top: -8px;
+}
+
+.rc-slider-rail {
+  background: linear-gradient();
 }
 
 @media (max-width: 900px) {

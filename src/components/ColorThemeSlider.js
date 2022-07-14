@@ -21,11 +21,22 @@ export default function ColorThemeSlider() {
   }
 
   useEffect(() => {
-    document.body.classList.add(activeTheme);
-    if (activeTheme !== prevTheme) {
-      document.body.classList.remove(prevTheme);
+    let timerId;
+    if (timerId) {
+      clearTimeout(timerId);
     }
 
+    document.body.classList.add(activeTheme);
+
+    if (activeTheme !== prevTheme) {
+      const gradient = document.getElementById("gradient-background");
+      gradient.classList.remove('gradient-background-on');
+      document.body.classList.remove(prevTheme);
+      timerId = setTimeout(() => {
+        gradient.classList.add('gradient-background-on');
+      }, 2000);
+      
+    }
   }, [activeTheme]);
 
   function getColorThemeKey(object, value) {
