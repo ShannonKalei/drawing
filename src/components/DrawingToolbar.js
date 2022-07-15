@@ -127,17 +127,6 @@ export default function DrawingToolbar(props) {
             Polygon
           </span>
       </button>
-      <input 
-        id="number-of-sides"
-        type="number"
-        inputMode="numeric"
-        min={3}
-        max={20}
-        value={polygonSides}
-        onChange={(e) => {
-          handleNumberOfPolygonSides(e.target.value);
-        }}
-      />
       <button
         onClick={() => {
           toolbarSelection("move");

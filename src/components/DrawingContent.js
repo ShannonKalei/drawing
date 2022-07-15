@@ -2,24 +2,26 @@ import React from "react";
 import { Arrow, Circle, Ellipse, Line, RegularPolygon } from "react-konva";
 
 class DrawingContent {
-  constructor(startx, starty, fill, stroke, isDraggable, polygonSides) {
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth, polygonSides) {
     this.startx = startx;
     this.starty = starty;
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
     this.polygonSides = polygonSides;
+    this.strokeWidth = strokeWidth;
   }
 }
 
 class ArrowDrawing extends DrawingContent {
-  constructor(startx, starty, fill, stroke, isDraggable) {
-    super(startx, starty, fill, stroke, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth) {
+    super(startx, starty, fill, stroke, isDraggable, strokeWidth);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
+    this.strokeWidth = strokeWidth;
   }
   registerMovement(x, y) {
     this.x = x;
@@ -37,19 +39,21 @@ class ArrowDrawing extends DrawingContent {
         points={points}
         fill={this.fill}
         stroke={this.stroke}
+        strokeWidth={this.strokeWidth}
       />
     );
   }
 }
 
 class CircleDrawing extends ArrowDrawing {
-  constructor(startx, starty, fill, stroke, isDraggable) {
-    super(startx, starty, fill, stroke, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth) {
+    super(startx, starty, fill, stroke, isDraggable, strokeWidth);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
+    this.strokeWidth = strokeWidth;
   }
   render() {
     const dx = this.startx - this.x;
@@ -66,19 +70,21 @@ class CircleDrawing extends ArrowDrawing {
         y={this.starty}
         fill={this.fill}
         stroke={this.stroke}
+        strokeWidth={this.strokeWidth}
       />
     );
   }
 }
 
 class EllipseDrawing extends ArrowDrawing {
-  constructor(startx, starty, fill, stroke, isDraggable) {
-    super(startx, starty, fill, stroke, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth) {
+    super(startx, starty, fill, stroke, isDraggable, strokeWidth);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
+    this.strokeWidth = strokeWidth;
   }
   render() {
     const dx = this.startx - this.x;
@@ -95,19 +101,21 @@ class EllipseDrawing extends ArrowDrawing {
         y={this.starty}
         fill={this.fill}
         stroke={this.stroke}
+        strokeWidth={this.strokeWidth}
       />
     );
   }
 }
 
 class SquareDrawing extends ArrowDrawing {
-  constructor(startx, starty, fill, stroke, isDraggable) {
-    super(startx, starty, fill, stroke, isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth) {
+    super(startx, starty, fill, stroke, isDraggable, strokeWidth);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
+    this.strokeWidth = strokeWidth;
   }
   render() {
     const dx = this.startx - this.x;
@@ -126,20 +134,22 @@ class SquareDrawing extends ArrowDrawing {
         y={this.starty}
         fill={this.fill}
         stroke={this.stroke}
+        strokeWidth={this.strokeWidth}
       />
     );
   }
 }
 
 class PolygonDrawing extends ArrowDrawing {
-  constructor(startx, starty, fill, stroke, isDraggable, polygonSides) {
-    super(startx, starty, fill, stroke, isDraggable, polygonSides);
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth, polygonSides) {
+    super(startx, starty, fill, stroke, isDraggable, strokeWidth, polygonSides);
     this.x = startx;
     this.y = starty;
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
     this.polygonSides = polygonSides;
+    this.strokeWidth = strokeWidth;
   }
   render() {
     const dx = this.startx - this.x;
@@ -164,23 +174,27 @@ class PolygonDrawing extends ArrowDrawing {
         scaleY={scaleY}
         fill={this.fill}
         stroke={this.stroke}
+        strokeWidth={this.strokeWidth}
       />
     );
   }
 }
 
 class FreePathDrawing extends DrawingContent {
-  constructor(startx, starty, fill, stroke, isDraggable) {
-    super(startx, starty, fill, stroke,isDraggable);
+  constructor(startx, starty, fill, stroke, isDraggable, strokeWidth) {
+    super(startx, starty, fill, stroke,isDraggable, strokeWidth);
     this.points = [startx, starty];
     this.fill = fill;
     this.stroke = stroke;
     this.isDraggable = isDraggable;
+    this.strokeWidth = strokeWidth;
   }
+  
   registerMovement(x, y) {
     this.points = [...this.points, x, y];
   }
   render() {
+    console.log(this.strokeWidth);
     return (
       <Line
         className="drawing drawing-free-path"
@@ -188,6 +202,7 @@ class FreePathDrawing extends DrawingContent {
         points={this.points}
         fill={this.fill}
         stroke={this.stroke}
+        strokeWidth={this.strokeWidth}
       />
     );
   }

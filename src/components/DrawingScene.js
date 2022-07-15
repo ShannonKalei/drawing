@@ -10,6 +10,8 @@ import {
 } from "./DrawingContent";
 import DrawingToolbar from "./DrawingToolbar";
 import ColorPicker from "./ColorPicker";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
 export default class DrawingScene extends Component {
   constructor(props) {
@@ -20,6 +22,7 @@ export default class DrawingScene extends Component {
       newDrawingType: "FreePathDrawing",
       fill: "#aaccee44",
       stroke: "#aacceeff",
+      strokeWidth: 3,
       selectedTool: "drawing",
       isDraggable: false,
       polygonSides: 5
@@ -41,6 +44,7 @@ export default class DrawingScene extends Component {
       this.state.fill,
       this.state.stroke,
       this.state.isDraggable,
+      this.state.strokeWidth,
       this.state.polygonSides
     );
   };
@@ -110,6 +114,10 @@ export default class DrawingScene extends Component {
     if (colorTarget === "fill") this.setState({ fill: colorSelection });
   }
 
+  handleStrokeWidth = (width) => {
+    this.setState({ strokeWidth: width });
+  }
+
   handlePolygonSides = (sides) => {
     this.setState({ polygonSides: sides });
   }
@@ -136,19 +144,57 @@ export default class DrawingScene extends Component {
             )}
           </Layer>
         </Stage>
-        <DrawingToolbar
-          handleDrawingSelection={this.handleDrawingSelection}
-          handleToolbarSelection={this.handleToolbarSelection}
-          handlePolygonSides={this.handlePolygonSides}
-          polygonSides={this.state.polygonSides}
-          drawingType={this.state.newDrawingType}
-          currentTool={this.state.selectedTool}
-        />
-        <div className="flex-container">
-          <h1>Stroke</h1>
-          <ColorPicker colorTarget={"stroke"} updateColorSelection={this.updateColorSelection}/>
-          <h1>Fill</h1>
-          <ColorPicker colorTarget={"fill"} updateColorSelection={this.updateColorSelection}/>
+        <div className="drawing-tools">
+          <DrawingToolbar
+            handleDrawingSelection={this.handleDrawingSelection}
+            handleToolbarSelection={this.handleToolbarSelection}
+            handlePolygonSides={this.handlePolygonSides}
+            polygonSides={this.state.polygonSides}
+            drawingType={this.state.newDrawingType}
+            currentTool={this.state.selectedTool}
+          />
+          <div className="flex-container justify-center">
+            <div className="sub-container">
+              <div className="drawing-tool-options">
+                <h2>Stroke Width</h2>
+                <Slider
+                  className='polygon-sides-slider'
+                  value={this.state.strokeWidth}
+                  min={1}
+                  max={20}
+                  step={1}
+                  marks={{1:1, 20:20}}
+                  onChange={(value) => {
+                    this.handleStrokeWidth(value);
+                  }}
+                  included={false}
+                />
+              </div>
+              <div className="drawing-tool-options">
+                <h2>Number of Sides</h2>
+                <Slider
+                  className='polygon-sides-slider'
+                  value={this.state.polygonSides}
+                  min={3}
+                  max={20}
+                  step={1}
+                  marks={{3:3, 20:20}}
+                  onChange={(value) => {
+                    this.handlePolygonSides(value);
+                  }}
+                  included={false}
+                />
+              </div>
+            </div>
+            <div className="sub-container">
+              <h2>Stroke Color</h2>
+              <ColorPicker colorTarget={"stroke"} updateColorSelection={this.updateColorSelection} startColor={this.state.stroke} startAlpha={100}/>
+            </div>
+            <div className="sub-container">
+              <h2>Fill Color</h2>
+              <ColorPicker colorTarget={"fill"} updateColorSelection={this.updateColorSelection}  startColor={this.state.fill} startAlpha={27}/>
+            </div>
+          </div>
         </div>
       </div>
     );

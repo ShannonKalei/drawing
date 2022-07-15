@@ -4,8 +4,8 @@ import hexToRGBA from "../utils/hexToRGBA";
 import checkerboard from "../assets/checkerboard.png";
 
 export default function ColorPicker(props) {
-  const [color, setColor] = useState("#aaccee");
-  const [alpha, setAlpha] = useState(100);
+  const [color, setColor] = useState(props.startColor);
+  const [alpha, setAlpha] = useState(props.startAlpha);
   const [rgbaColor, setRgbaColor] = useState(hexToRGBA(color));
 
   const colorSelection = (selectedColor) => {

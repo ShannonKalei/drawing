@@ -97,7 +97,7 @@ button {
   border-color: var(--color-button-border);
   color: var(--color-foreground);
   border-radius: 10px;
-  margin: 2px;
+  margin: 8px 4px;
   font-size: 18px;
   align-items: center;
   padding-bottom: 4px;
@@ -127,8 +127,9 @@ button:focus-visible {
   border: 1px solid var(--color-foreground);
   border-radius: 10px;
   box-shadow: 0 2px 4px 2px #00000088;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   overflow: hidden;
+  height: 58vh;
   width: 100%;
   transition: border-color  2s  ease-out;
 }
@@ -138,11 +139,19 @@ button:focus-visible {
   margin-right: 2px;
 }
 
+.drawing-tools {
+  text-align: center;
+}
+
 .color-picker {
-  margin: 12px;
+
 }
 
  /* react-colorful overrides */
+ .react-colorful {
+  height: 125px !important;
+ }
+
 .react-colorful__last-control {
   border-radius: 0 !important;
   padding: 1px;
@@ -152,10 +161,23 @@ button:focus-visible {
   box-shadow: 0 2px 4px 2px #00000088 !important;
 }
 
+.color-picker-input {
+  margin: 0 auto;
+}
+
 h1 {
   font-size: 1.8em;
   font-family: 'OpenDyslexic3Regular', 'Architects Daughter', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: bold;
+  margin: 0 0 16px;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-family: 'OpenDyslexic3Regular', 'Architects Daughter', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  margin: 0 0 6px;
+  text-align: left;
 }
 
 span {
@@ -171,13 +193,25 @@ span {
   display: flex;
 }
 
+.sub-container {
+  margin: 0 20px;
+}
+
+.drawing-tool-options {
+  margin-bottom: 40px;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 .space-between {
   justify-content: space-between;
   align-items: center;
 }
 
 .header {
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 }
 
 input[type=range]
