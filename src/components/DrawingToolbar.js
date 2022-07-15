@@ -16,9 +16,8 @@ export default function DrawingToolbar(props) {
     props.handleDrawingSelection(drawingSelection);
   };
 
-  const handleNumberOfPolygonSides = (sides) => {
-    setPolygonSides(sides);
-    props.handlePolygonSides(sides);
+  const requestClearCanvas = () => {
+    props.handleClearCanvas();
   }
 
   // TODO: Fix this ridiculous styling.
@@ -177,6 +176,14 @@ export default function DrawingToolbar(props) {
           }}>
             Move
         </span>
+      </button>
+      <button
+        onClick={() => {
+          requestClearCanvas();
+        }}
+      >
+        <span className="material-icons">delete</span>
+        <span className="button-text">Clear</span>
       </button>
     </React.Fragment>
   );

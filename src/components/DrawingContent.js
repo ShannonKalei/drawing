@@ -194,7 +194,6 @@ class FreePathDrawing extends DrawingContent {
     this.points = [...this.points, x, y];
   }
   render() {
-    console.log(this.strokeWidth);
     return (
       <Line
         className="drawing drawing-free-path"

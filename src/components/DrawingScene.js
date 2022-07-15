@@ -122,6 +122,10 @@ export default class DrawingScene extends Component {
     this.setState({ polygonSides: sides });
   }
 
+  handleClearCanvas = () => {
+    this.setState({ drawings: [] });
+  }
+
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
     const canvasWidth = document.body.clientWidth;
@@ -149,6 +153,7 @@ export default class DrawingScene extends Component {
             handleDrawingSelection={this.handleDrawingSelection}
             handleToolbarSelection={this.handleToolbarSelection}
             handlePolygonSides={this.handlePolygonSides}
+            handleClearCanvas={this.handleClearCanvas}
             polygonSides={this.state.polygonSides}
             drawingType={this.state.newDrawingType}
             currentTool={this.state.selectedTool}
