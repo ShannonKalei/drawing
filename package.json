@@ -2,6 +2,7 @@
     "name": "drawing",
     "version": "1.0.0",
     "description": "testing out some drawing",
+    "homepage": "https://shannonkalei.github.io/drawing/",
     "keywords": [
       "react",
       "starter"
