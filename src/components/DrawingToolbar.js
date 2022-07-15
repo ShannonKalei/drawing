@@ -21,9 +21,15 @@ export default function DrawingToolbar(props) {
     props.handlePolygonSides(sides);
   }
 
+  // TODO: Fix this ridiculous styling.
   return (
     <React.Fragment>
       <button
+      style={{
+        backgroundColor: currentTool === "drawing" && currentDrawingType === "FreePathDrawing" 
+        ? "var(--color-button-active)"
+        : "var(--color-button)"
+      }}
         onClick={() => {
           drawingType("FreePathDrawing");
         }}
@@ -41,6 +47,11 @@ export default function DrawingToolbar(props) {
       </button>
 
       <button
+        style={{
+          backgroundColor: currentTool === "drawing" && currentDrawingType === "ArrowDrawing" 
+          ? "var(--color-button-active)"
+          : "var(--color-button)"
+        }}
         onClick={() => {
           drawingType("ArrowDrawing");
         }}
@@ -58,6 +69,11 @@ export default function DrawingToolbar(props) {
       </button>
 
       <button
+        style={{
+          backgroundColor: currentTool === "drawing" && currentDrawingType === "CircleDrawing" 
+          ? "var(--color-button-active)"
+          : "var(--color-button)"
+        }}
         onClick={() => {
           drawingType("CircleDrawing");
         }}
@@ -75,6 +91,11 @@ export default function DrawingToolbar(props) {
       </button>
 
       <button
+        style={{
+          backgroundColor: currentTool === "drawing" && currentDrawingType === "EllipseDrawing" 
+          ? "var(--color-button-active)"
+          : "var(--color-button)"
+        }}
         onClick={() => {
           drawingType("EllipseDrawing");
         }}
@@ -93,6 +114,11 @@ export default function DrawingToolbar(props) {
       </button>
 
       <button
+        style={{
+          backgroundColor: currentTool === "drawing" && currentDrawingType === "SquareDrawing" 
+          ? "var(--color-button-active)"
+          : "var(--color-button)"
+        }}
         onClick={() => {
           drawingType("SquareDrawing");
         }}
@@ -111,6 +137,11 @@ export default function DrawingToolbar(props) {
       </button>
 
       <button
+        style={{
+          backgroundColor: currentTool === "drawing" && currentDrawingType === "PolygonDrawing" 
+          ? "var(--color-button-active)"
+          : "var(--color-button)"
+        }}
         onClick={() => {
           drawingType("PolygonDrawing");
         }}
@@ -128,6 +159,11 @@ export default function DrawingToolbar(props) {
           </span>
       </button>
       <button
+        style={{
+          backgroundColor: currentTool === "move" 
+            ? "var(--color-button-active)"
+            : "var(--color-button)",
+        }}
         onClick={() => {
           toolbarSelection("move");
         }}

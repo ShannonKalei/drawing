@@ -8,7 +8,6 @@ body {
   --color-foreground: #000;
   --color-button: #aaa;
   --color-button-active: #ddd;
-  --color-button-border: #000
 }
 
 .sunrise {
@@ -16,18 +15,15 @@ body {
   --color-gradient: #ffdbb1;
   --color-foreground: #403931;
   --color-button: #ffcece;
-  --color-button-active: #fff;
-  --color-button-border: #000
-  
+  --color-button-active: #fff5f5;  
 }
 
 .light {
   --color-background: #ffffff;
   --color-gradient: transparent;
   --color-foreground: #000000;
-  --color-button: #ddd;
-  --color-button-active: #bbb;
-  --color-button-border: #000
+  --color-button: #d8f1fd;
+  --color-button-active: #96dbfa;
 }
 
 .sunset {
@@ -35,8 +31,7 @@ body {
   --color-gradient: #3c0000;
   --color-foreground: #ffcece;
   --color-button: #351931;
-  --color-button-active: #462742;
-  --color-button-border: #fff;
+  --color-button-active: #612e59;
 }
 
 .night {
@@ -44,8 +39,7 @@ body {
   --color-gradient: #1d1335;
   --color-foreground: #b0b0b0;
   --color-button: #202230;
-  --color-button-active: #313341;
-  --color-button-border: #000
+  --color-button-active: #33364d;
 }
 
 .dark {
@@ -53,14 +47,13 @@ body {
   --color-gradient: transparent;
   --color-foreground: #a5a5a5;
   --color-button: #2a2a2a;
-  --color-button-active: #ddd;
-  --color-button-border: #000
+  --color-button-active: #111;
 }
 
 body {
   color: var(--color-foreground);
   background-color: var(--color-background);
-  transition: color 2s ease-out, background-color 2s ease-out;
+  transition: color 2s ease-out, background-color 1s ease-out;
 }
 
 .gradient-background {
@@ -94,7 +87,7 @@ video {
 
 button {
   background-color: var(--color-button);
-  border-color: var(--color-button-border);
+  border-color: var(--color-foreground);
   color: var(--color-foreground);
   border-radius: 10px;
   margin: 8px 4px;
@@ -141,10 +134,6 @@ button:focus-visible {
 
 .drawing-tools {
   text-align: center;
-}
-
-.color-picker {
-
 }
 
  /* react-colorful overrides */

@@ -158,12 +158,12 @@ export default class DrawingScene extends Component {
               <div className="drawing-tool-options">
                 <h2>Stroke Width</h2>
                 <Slider
-                  className='polygon-sides-slider'
+                  className='stroke-width-slider'
                   value={this.state.strokeWidth}
                   min={1}
-                  max={20}
+                  max={30}
                   step={1}
-                  marks={{1:1, 20:20}}
+                  marks={{1:1, 10:10, 20:20, 30:30}}
                   onChange={(value) => {
                     this.handleStrokeWidth(value);
                   }}
@@ -176,9 +176,9 @@ export default class DrawingScene extends Component {
                   className='polygon-sides-slider'
                   value={this.state.polygonSides}
                   min={3}
-                  max={20}
+                  max={21}
                   step={1}
-                  marks={{3:3, 20:20}}
+                  marks={{3:3, 9:9, 15:15, 21:21}}
                   onChange={(value) => {
                     this.handlePolygonSides(value);
                   }}

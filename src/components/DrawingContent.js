@@ -156,7 +156,7 @@ class PolygonDrawing extends ArrowDrawing {
     const dy = this.starty - this.y;
     const radius = Math.sqrt(dx * dx + dy * dy);
 
-    // TODO: figure out this math better  
+    // TODO: Figure out this math better.  
     const offset = 1.73; 
     const scaleX = (offset*dx)/radius || 0;
     const scaleY = (offset*dy)/radius || 0;
