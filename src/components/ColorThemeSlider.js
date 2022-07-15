@@ -6,11 +6,13 @@ import "rc-slider/assets/index.css";
 
 const useColorSchemeState = createPersistedState('colorScheme');
 
-
 export default function ColorThemeSlider() {
   const systemPrefersDark = useMediaQuery({query: '(prefers-color-scheme: dark)'});
+  const initialColorState = useColorSchemeState();
   const [ prevTheme, setPrevTheme ] = useState(systemPrefersDark ? 'dark' : 'light');
-  const [ activeTheme, setActiveTheme ] = useColorSchemeState();
+  const [ activeTheme, setActiveTheme ] = initialColorState[0] 
+    ? useColorSchemeState() 
+    : useColorSchemeState(systemPrefersDark ? 'dark' : 'light');
 
   const colorThemes = {
     1: "sunrise",
