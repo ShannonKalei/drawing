@@ -140,6 +140,7 @@ export default class DrawingScene extends Component {
           onMouseMove={this.handleMouseMove}
           width={canvasWidth}
           height={canvasHeight}
+          minHeight={600}
         >
           <Layer>
             {React.Children.toArray(
