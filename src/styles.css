@@ -128,6 +128,10 @@ button:focus-visible {
   transition: border-color  2s  ease-out;
 }
 
+.konvajs-content{
+  min-height: 600px;
+}
+
 .material-icons {
   font-size: inherit;
   margin-right: 2px;
