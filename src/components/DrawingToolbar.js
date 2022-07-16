@@ -99,7 +99,7 @@ export default function DrawingToolbar(props) {
           drawingType("EllipseDrawing");
         }}
       >
-        <span className="material-icons">circle</span>
+        <span className="material-icons" style={{ transform: "scaleY(1.25)" }}>circle</span>
         <span 
           className="button-text"
           style={{ 

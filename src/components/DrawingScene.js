@@ -128,7 +128,9 @@ export default class DrawingScene extends Component {
 
   render() {
     const drawings = [...this.state.drawings, ...this.state.newDrawing];
+    // This is hopefully solving for high resolution monitors.
     const canvasWidth = document.body.clientWidth;
+    const canvasHeight = document.body.clientHeight;
     return (
       <div>
         <Stage
@@ -137,7 +139,7 @@ export default class DrawingScene extends Component {
           onMouseUp={this.handleMouseUp}
           onMouseMove={this.handleMouseMove}
           width={canvasWidth}
-          height={600}
+          height={canvasHeight}
         >
           <Layer>
             {React.Children.toArray(

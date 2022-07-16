@@ -92,7 +92,6 @@ export default function ColorPicker(props) {
         max="100"
         step="1"
         value={alpha}
-        orient="vertical"
         onChange={e => handleAlphaSelection(e.target.value)}
         style={{ 
           background: `linear-gradient(to right, rgba(${rgbaColor.r}, ${rgbaColor.g}, ${rgbaColor.b}, 0), rgba(${rgbaColor.r}, ${rgbaColor.g}, ${rgbaColor.b}, 1)), url(${checkerboard})` 

@@ -91,6 +91,7 @@ button {
   color: var(--color-foreground);
   border-radius: 10px;
   margin: 8px 4px;
+  display: inline-flex;
   font-size: 18px;
   align-items: center;
   padding-bottom: 4px;
@@ -139,6 +140,7 @@ button:focus-visible {
  /* react-colorful overrides */
  .react-colorful {
   height: 125px !important;
+  width: 100% !important;
  }
 
 .react-colorful__last-control {
@@ -184,6 +186,8 @@ span {
 
 .sub-container {
   margin: 0 20px;
+  max-width: 200px;
+  width: 20vw;
 }
 
 .drawing-tool-options {
@@ -207,12 +211,17 @@ input[type=range]
 {
   border-radius: 0 0 8px 8px;  
   margin: 0;
+  height: 28px;
   width: 100%;
-  -webkit-appearance: none;
-    
+  -webkit-appearance: none; 
 }
 
 input[type=range]::-webkit-slider-runnable-track {
+  cursor: pointer;
+  opacity: .5;
+}
+
+input[type=range]::-moz-range-track {
   cursor: pointer;
   opacity: .5;
 }
@@ -222,9 +231,19 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 4px;
   height: 28px;
   width: 10px;
-  background: #f0f;
+  background: #888;
   box-shadow: 0 2px 4px 2px #00000088;
   -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  height: 28px;
+  width: 10px;
+  background: #888;
+  box-shadow: 0 2px 4px 2px #00000088;
+  -moz-appearance: none;
 }
 
 .color-theme-slider {
@@ -261,10 +280,25 @@ input[type=range]::-webkit-slider-thumb {
   background: linear-gradient();
 }
 
+@media (max-width: 1100px) {
+  h2 {
+    font-size: 1.75vw;
+  }
+  
+  span {
+    font-size: 1.65vw;
+  }
+
+  /* .sub-container {
+    width: 17vw;
+  } */
+}
+
 @media (max-width: 900px) {
   h1 {
     font-size: 3.2vw;
   }
+
   .rc-slider-mark-text {
     font-size: 1.8vw;
   }
