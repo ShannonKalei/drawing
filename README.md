@@ -24,3 +24,7 @@ Interactive demo hosted on GitHub Pages: <https://shannonkalei.github.io/drawing
 ## Dev
 
 Run the command `npm start` in the main directory to run the app locally.
+
+## License 
+
+[MIT License](/LICENSE.md)
