@@ -21,6 +21,7 @@ const getAlphafloat = (a, alpha) => {
 
 export default function hexToRGBA(hex, alpha) {
     if (!isValidHex(hex)) {
+      console.log("hex: ", hex);
       throw new Error("Invalid hex: ", hex);
     }
 

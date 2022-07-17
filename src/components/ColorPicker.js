@@ -9,9 +9,13 @@ export default function ColorPicker(props) {
   const [rgbaColor, setRgbaColor] = useState(hexToRGBA(color));
 
   const colorSelection = (selectedColor) => {
-    setRgbaColor(hexToRGBA(selectedColor));
-    setColor(selectedColor);
-    props.updateColorSelection(selectedColor, props.colorTarget);
+    let nextColor = selectedColor;
+    if (nextColor.length > 9) {
+      nextColor = nextColor.substring(0, 7);
+    }
+    setRgbaColor(hexToRGBA(nextColor));
+    setColor(nextColor);
+    props.updateColorSelection(nextColor, props.colorTarget);
   }
 
   const checkForAlphaSelection = (selectedColor) => {
@@ -26,12 +30,13 @@ export default function ColorPicker(props) {
       // Cases with alpha
       case 5:
         hexAlpha = selectedColor.slice(-1, selectedColor.length);
-        workingAlpha = parseInt(hexAlpha, 16);
+        hexAlpha = hexAlpha.concat(hexAlpha);
+        workingAlpha = Math.floor((parseInt(hexAlpha, 16)/255) * 100);
         setAlpha(workingAlpha);
         break;
       case 9:
         hexAlpha = selectedColor.slice(-2, selectedColor.length);
-        workingAlpha = parseInt(hexAlpha, 16);
+        workingAlpha = Math.floor((parseInt(hexAlpha, 16)/255)*100);
         setAlpha(workingAlpha);
         break;
       default:
