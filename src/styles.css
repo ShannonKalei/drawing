@@ -123,7 +123,7 @@ button:focus-visible {
   box-shadow: 0 2px 4px 2px #00000088;
   margin-bottom: 4px;
   overflow: hidden;
-  height: 58vh;
+  height: 55vh;
   width: 100%;
   transition: border-color  2s  ease-out;
 }
@@ -178,6 +178,11 @@ h2 {
 span {
   font-family: 'OpenDyslexic3Regular', 'Arial Narrow', Arial, sans-serif;
   font-weight: bold;
+}
+
+label {
+  font-family: 'OpenDyslexic3Regular', 'Arial Narrow', Arial, sans-serif;
+  font-size: 12px;
 }
 
 .page-container {

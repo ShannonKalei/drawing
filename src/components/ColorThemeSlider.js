@@ -53,6 +53,7 @@ export default function ColorThemeSlider() {
     <React.Fragment>
       <Slider
           className='color-theme-slider'
+          ariaLabelForHandle='Choose color theme'
           value={getColorThemeKey(colorThemes, activeTheme)}
           min={1}
           max={5}

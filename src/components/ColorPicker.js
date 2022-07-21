@@ -91,7 +91,8 @@ export default function ColorPicker(props) {
         }}
       />
       <input 
-        id="alpha-slider"
+        id={`alpha-slider-${props.colorTarget}`}
+        aria-label={`Alpha slider for ${props.colorTarget} color`}
         type="range"
         min="0"
         max="100"
@@ -103,6 +104,7 @@ export default function ColorPicker(props) {
         }}
       />
       <HexColorInput 
+        id={`${props.colorTarget} color input`}
         className="color-picker-input"
         color={color}
         onChange={(value) => {

@@ -13,6 +13,11 @@ import ColorPicker from "./ColorPicker";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
+const colorRegexp = /\d+/g;
+
+  // React.StrictMode workaround for double render in development
+  let ignore = false;
+
 export default class DrawingScene extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +32,54 @@ export default class DrawingScene extends Component {
       isDraggable: false,
       polygonSides: 5
     };
+  }
+
+  componentDidMount() {
+    // Accessibility add-ins for components from external libraries
+    const reactColorfulInteractives = document.getElementsByClassName("react-colorful__interactive");
+    const reactColorfulInputs = document.getElementsByClassName("color-picker-input");
+    for (let i = 0; i < reactColorfulInteractives.length; i++) {
+      if (reactColorfulInteractives[i].ariaLabel === 'Hue') {
+        reactColorfulInteractives[i].setAttribute('aria-valuemin', 0);
+        reactColorfulInteractives[i].setAttribute('aria-valuemax', 360);
+        reactColorfulInteractives[i].setAttribute('aria-valuenow', reactColorfulInteractives[i].getAttribute('aria-valuetext'));
+      }
+
+      if (reactColorfulInteractives[i].ariaLabel === 'Color') {
+        reactColorfulInteractives[i].setAttribute('aria-valuemin', 0);
+        reactColorfulInteractives[i].setAttribute('aria-valuemax', 100);
+
+        const value = reactColorfulInteractives[i].getAttribute('aria-valuetext');
+        const valueArray = [...value.matchAll(colorRegexp)];
+        reactColorfulInteractives[i].setAttribute('aria-valuenow', parseInt(valueArray[0]));
+      }
+    }
+
+    if (!ignore) {
+      for (let k = 0; k < reactColorfulInputs.length; k++) {
+        let label = document.createElement("label");
+        label.setAttribute('for', reactColorfulInputs[k].getAttribute('id'));
+        label.textContent = 'Hex color input';
+        reactColorfulInputs[k].parentNode.insertBefore(label, reactColorfulInputs[k]);
+      }
+      ignore = true;
+    }
+  }
+
+  componentDidUpdate() {
+    // Accessibility add-ins for components from external libraries
+    const reactColorfulInteractives = document.getElementsByClassName("react-colorful__interactive");
+    for (let i = 0; i < reactColorfulInteractives.length; i++) {
+      if (reactColorfulInteractives[i].ariaLabel === 'Hue') {
+        reactColorfulInteractives[i].setAttribute('aria-valuenow', reactColorfulInteractives[i].getAttribute('aria-valuetext'));
+      }
+
+      if (reactColorfulInteractives[i].ariaLabel === 'Color') {
+        const value = reactColorfulInteractives[i].getAttribute('aria-valuetext');
+        const valueArray = [...value.matchAll(colorRegexp)];
+        reactColorfulInteractives[i].setAttribute('aria-valuenow', parseInt(valueArray[0]));
+      }
+    }
   }
 
   getNewDrawingBasedOnType = (x, y, type) => {
@@ -167,6 +220,7 @@ export default class DrawingScene extends Component {
                 <h2>Stroke Width</h2>
                 <Slider
                   className='stroke-width-slider'
+                  ariaLabelForHandle='Choose stroke width'
                   value={this.state.strokeWidth}
                   min={1}
                   max={30}
@@ -182,6 +236,7 @@ export default class DrawingScene extends Component {
                 <h2>Number of Sides</h2>
                 <Slider
                   className='polygon-sides-slider'
+                  ariaLabelForHandle='Choose number of sides for polygon shapes'
                   value={this.state.polygonSides}
                   min={3}
                   max={21}
